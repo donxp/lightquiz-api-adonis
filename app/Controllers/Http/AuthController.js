@@ -67,6 +67,19 @@ class AuthController {
             }
         }
     }
+
+    async check({ auth }) {
+        try {
+            await auth.check()
+            return {
+                success: true
+            }
+        } catch (e) {
+            return {
+                success: false
+            }
+        }
+    }
 }
 
 module.exports = AuthController
