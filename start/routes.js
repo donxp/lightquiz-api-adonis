@@ -15,6 +15,7 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+const MultiLogger = use('MultiLogger')
 
 Route.group(() => {
     Route.post('auth/login', 'AuthController.login')
