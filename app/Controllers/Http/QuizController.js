@@ -46,8 +46,10 @@ class QuizController {
 
         try {
             const quizModel = new Quiz()
+
             quizModel.name = input.name
-            quizModel.created_by = 2
+            quizModel.created_by = 1 // TODO: get user id
+
             await quizModel.save()
 
             for(let question of input.questions) {

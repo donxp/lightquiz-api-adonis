@@ -10,6 +10,7 @@ class QuizSchema extends Schema {
       
       table.string('name', 50).notNullable()
       table.integer('created_by').unsigned().references('id').inTable('users')
+      table.uuid('remove_id').notNullable()
 
       table.timestamps()
     })
