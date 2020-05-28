@@ -15,13 +15,12 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-const MultiLogger = use('MultiLogger')
 
 Route.group(() => {
     Route.post('auth/login', 'AuthController.login')
     Route.post('auth/register', 'AuthController.register')
     Route.get('auth/check', 'AuthController.check')
 
-    Route.get('quiz/:id', 'QuizController.get')
-    Route.post('quiz', 'QuizController.store')
+    Route.get('quiz/:id', 'QuizController.get').middleware('auth')
+    Route.post('quiz', 'QuizController.store').middleware('auth')
 })

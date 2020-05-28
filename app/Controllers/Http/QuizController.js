@@ -2,6 +2,8 @@
 
 const { validate } = use('Validator')
 const Database = use('Database')
+const MultiLogger = use('MultiLogger')
+
 const Quiz = use('App/Models/Quiz')
 const QuizQuestion = use('App/Models/QuizQuestion')
 const QuizAnswer = use('App/Models/QuizAnswer')
@@ -22,7 +24,7 @@ class QuizController {
         }
     }
 
-    async store({ request }) {
+    async store({ request, auth }) {
         const rules = {
             'name': 'required|string|max:30',
             'questions': 'required|array|min:1',
@@ -43,12 +45,13 @@ class QuizController {
         }
 
         const trx = await Database.beginTransaction()
+        const user = await auth.getUser()
 
         try {
             const quizModel = new Quiz()
 
             quizModel.name = input.name
-            quizModel.created_by = 1 // TODO: get user id
+            quizModel.created_by = user.id
 
             await quizModel.save()
 
@@ -72,12 +75,16 @@ class QuizController {
             }
 
             await trx.commit()
-
+            
             return {
-                success: true
+                success: true,
+                id: quizModel.id,
+                remove_id: quizModel.remove_id
             }
         } catch (e) {
             await trx.rollback()
+
+            MultiLogger.warning('Unable to create quiz', e)
 
             return {
                 success: false,
