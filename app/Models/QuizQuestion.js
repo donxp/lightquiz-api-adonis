@@ -11,6 +11,10 @@ class QuizQuestion extends Model {
     quiz() {
         return this.belongsTo('App/Models/Quiz', 'quiz_id', 'id')
     }
+
+    static get visible() {
+        return ['allow_multiple_answers', 'name']
+    }
 }
 
 module.exports = QuizQuestion

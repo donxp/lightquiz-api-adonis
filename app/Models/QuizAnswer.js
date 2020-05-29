@@ -7,6 +7,10 @@ class QuizAnswer extends Model {
     question() {
         return this.belongsTo('App/Models/QuizQuestion', 'question_id', 'id')
     }
+
+    static get visible() {
+        return ['name']
+    }
 }
 
 module.exports = QuizAnswer

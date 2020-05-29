@@ -26,10 +26,10 @@ class QuizController {
 
     async store({ request, auth }) {
         const rules = {
-            'name': 'required|string|max:30',
+            'name': 'required|string|max:60',
             'questions': 'required|array|min:1',
             'questions.*.allow_multiple': 'required|boolean',
-            'questions.*.name': 'required|string|max:30',
+            'questions.*.name': 'required|string|max:60',
             'questions.*.answers': 'required|array|min:2'
         }
 

@@ -16,6 +16,10 @@ class Quiz extends Model {
     questions() {
         return this.hasMany('App/Models/QuizQuestion')
     }
+
+    static get visible() {
+        return ['name']
+    }
 }
 
 module.exports = Quiz

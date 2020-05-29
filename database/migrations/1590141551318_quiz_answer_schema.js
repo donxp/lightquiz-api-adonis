@@ -8,7 +8,7 @@ class QuizAnswerSchema extends Schema {
     this.create('quiz_answers', (table) => {
       table.increments()
 
-      table.string('name', 50).notNullable()
+      table.string('name', 60).notNullable()
       table.integer('question_id').unsigned().references('id').inTable('quiz_questions')
 
       table.timestamps()
